@@ -5,22 +5,24 @@
 class LloydMax
 {
 public:
-	LloydMax(int m, PDF *pdf);
+	LloydMax(int m, PDF *pdf, double minv, double maxv);
 	~LloydMax(void);
-	void doIteration(int count);
-	float getA(int i);
-	float getB(int i);
-	int   getM();
+	int doIteration(int count);
+	int doIteration();
+	double getA(int i);
+	double getB(int i);
+	int    getM();
 
 private:
 	int m;
 	PDF *pdf;
-	float *a;
-	float *b;
+	double *a;
+	double *b;
+	int total;
 
-	void updateA();
-	void updateA(int i);
-	void updateB();
-	void updateB(int i);
+	bool updateA();
+	bool updateA(int i);
+	bool updateB();
+	bool updateB(int i);
 };
 

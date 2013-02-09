@@ -4,6 +4,6 @@ class PDF
 public:
 	PDF(void);
 	~PDF(void);
-	virtual float f(float v) = 0;
+	virtual double f(double v) = 0;
 };
 
