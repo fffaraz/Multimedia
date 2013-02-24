@@ -1,5 +1,4 @@
 
-
 #include <iostream>
 using namespace std;
 
@@ -11,8 +10,8 @@ class MyPDF : public PDF
 public:
 	double f(double v)
 	{
-		if(v>-5 && v<5)
-			return 0.1;
+		if(v>=-1 && v<=1)
+			return 0.5;
 		else
 			return 0;
 	}
@@ -20,11 +19,15 @@ public:
 
 int main(int argc, char *argv[])
 {
-	LloydMax lm(256, new MyPDF, -5, 5);
+	LloydMax lm(8, new MyPDF, -1, 1, 100, 0.000001);
+	//lm.init(false);
+	lm.init(true);
 
 	for (int i = 0; i < 1; i++)
 	{
-		cout << "Iterations : " << lm.doIteration()  << endl << endl;
+		int iterations = 0;
+		iterations = lm.doIteration();
+		cout << "Iterations : " << iterations << endl << endl;
 
 		for(int i=1; i <= lm.getM(); i++)
 		{
@@ -45,3 +48,4 @@ int main(int argc, char *argv[])
 	cin.get();
 	return 0;
 }
+

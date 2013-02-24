@@ -1,6 +1,6 @@
 #include "LloydMax.h"
 
-LloydMax::LloydMax(int m, PDF *pdf, double minv, double maxv)
+LloydMax::LloydMax(int m, PDF *pdf, double minv, double maxv, int maxiter, double minmse)
 {
 	this->m = m;
 	this->pdf = pdf;
@@ -18,6 +18,35 @@ LloydMax::LloydMax(int m, PDF *pdf, double minv, double maxv)
 	b[0] = minv;
 	b[m] = maxv;
 
+	this->maxiter = maxiter;
+	this->minmse  = minmse;
+}
+
+void LloydMax::init(bool rand)
+{
+	if (rand)
+	{
+		typedef std::mt19937 MyRNG;  // the Mersenne Twister with a popular choice of parameters
+		MyRNG rng;
+		rng.seed(time(NULL));
+		std::uniform_real_distribution<double> real_dist(b[0],b[m]);
+		for (int i = 1; i <= m; i++)
+		{
+			a[i] = real_dist(rng);
+		}
+		updateB();
+	}
+	else
+	{
+		double step = (b[m]-b[0])/m;
+		double val = b[0]+step/2;
+		for (int i = 1; i <= m; i++)
+		{
+			a[i] = val;
+			val += step;
+		}
+		updateB();
+	}
 }
 
 int LloydMax::doIteration(int count)
@@ -36,7 +65,7 @@ int LloydMax::doIteration()
 	int counter = 0;
 	bool ans = true;
 
-	while (counter < 10000 && ans)
+	while (counter < maxiter && ans)
 	{
 		ans = false;
 		ans |= updateA();
@@ -90,7 +119,7 @@ bool LloydMax::updateA(int i)
 	else
 		na = sum1/sum2;
 	
-	bool ans = (na - a[i])*(na - a[i])>0.000001;
+	bool ans = (na - a[i])*(na - a[i])>minmse;
 	a[i] = na;
 	return ans;
 }
@@ -98,7 +127,7 @@ bool LloydMax::updateA(int i)
 bool LloydMax::updateB(int i)
 {
 	double nb = (a[i]+a[i+1])/2.0;
-	bool ans = (nb - b[i])*(nb - b[i])>0.000001;
+	bool ans = (nb - b[i])*(nb - b[i])>minmse;
 	b[i] = nb;
 	return ans;
 }
