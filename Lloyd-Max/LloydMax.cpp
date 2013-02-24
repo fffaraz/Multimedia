@@ -153,3 +153,40 @@ LloydMax::~LloydMax(void)
 	delete[] a;
 	delete[] b;
 }
+
+double LloydMax::calcMSE()
+{
+	double sum = 0;
+	for (int i = 1; i <= m; i++)
+	{
+		sum += calcMSE(i);
+	}
+	return sum;
+}
+
+double LloydMax::calcMSE(int i)
+{
+	double sum=0;
+	double delta = 0.001;
+	for (double d = b[i-1]; d < b[i]; d+=delta)
+	{
+		double val;
+
+		val  = pdf->f(d) * (d-a[i]) * (d-a[i]);
+		val *= delta;
+		sum += val;
+	}
+
+	return sum;
+}
+
+double LloydMax::quantize(double val)
+{
+	for (int i = 1; i <= m; i++)
+	{
+		if(val>=b[i-1] & val<=b[i])
+			return a[i];
+	}
+	return 0;
+}
+

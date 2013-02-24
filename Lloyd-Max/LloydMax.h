@@ -15,6 +15,9 @@ public:
 	double getA(int i);
 	double getB(int i);
 	int    getM();
+	double calcMSE();
+	double calcMSE(int i);
+	double quantize(double val);
 
 private:
 	int m;
