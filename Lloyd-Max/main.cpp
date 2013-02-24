@@ -11,8 +11,8 @@ class MyPDF : public PDF
 public:
 	double f(double v)
 	{
-		if(v>-1 && v<1)
-			return 0.5;
+		if(v>-5 && v<5)
+			return 0.1;
 		else
 			return 0;
 	}
@@ -20,11 +20,11 @@ public:
 
 int main(int argc, char *argv[])
 {
-	LloydMax lm(8, new MyPDF, -1, 1);
+	LloydMax lm(256, new MyPDF, -5, 5);
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 1; i++)
 	{
-		cout << "Iterations : " << lm.doIteration(10000)  << endl << endl;
+		cout << "Iterations : " << lm.doIteration()  << endl << endl;
 
 		for(int i=1; i <= lm.getM(); i++)
 		{
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 
 		for(int i=0; i <= lm.getM(); i++)
 		{
-			cout << "b[" << i << "] = " << lm.getB(i) << endl;
+			//cout << "b[" << i << "] = " << lm.getB(i) << endl;
 		}
 		cout << endl << "----------" << endl << endl;
 	}

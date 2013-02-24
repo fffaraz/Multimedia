@@ -36,7 +36,7 @@ int LloydMax::doIteration()
 	int counter = 0;
 	bool ans = true;
 
-	while (counter < 100000 && ans)
+	while (counter < 10000 && ans)
 	{
 		ans = false;
 		ans |= updateA();
@@ -90,7 +90,7 @@ bool LloydMax::updateA(int i)
 	else
 		na = sum1/sum2;
 	
-	bool ans = (na != a[i]);
+	bool ans = (na - a[i])*(na - a[i])>0.000001;
 	a[i] = na;
 	return ans;
 }
@@ -98,7 +98,7 @@ bool LloydMax::updateA(int i)
 bool LloydMax::updateB(int i)
 {
 	double nb = (a[i]+a[i+1])/2.0;
-	bool ans = (nb != b[i]);
+	bool ans = (nb - b[i])*(nb - b[i])>0.000001;
 	b[i] = nb;
 	return ans;
 }
