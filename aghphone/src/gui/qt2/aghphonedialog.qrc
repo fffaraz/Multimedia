@@ -1,0 +1,10 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file alias="disengage.png">../../common/icons/disengage.png</file>
+    <file alias="call.png">../../common/icons/call.png</file>
+    <file alias="tray.png">../../common/icons/tray.png</file>
+    <file alias="contactmcu.png">../../common/icons/contactmcu.png</file>
+    <file alias="contactuser.png">../../common/icons/contactuser.png</file>
+	<file alisa="ring.wav">../../common/ring.wav</file>
+</qresource>
+</RCC>
