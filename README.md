@@ -1,6 +1,6 @@
 Multimedia
 ==========
 
-My Multimedia Signal Processing &amp; VOIP Course Projects &amp; Assignments
+Multimedia Signal Processing &amp; VOIP Course Projects &amp; Assignments  <br>
 And other useful stuff !
 
